@@ -13,7 +13,6 @@ public class landingPage {
         this.driver = this.driver;
         PageFactory.initElements(driver,this);
     }
-
    // WebElement userEmail = driver.findElement(By.id("userEmail"));
     //PageFactory
     @FindBy(id="userEmail")
