@@ -25,7 +25,6 @@ public class standAloneTest {
 
         String productName = "ZARA COAT 3";
 
-
         //Enter Username passsword click on login
         driver.findElement(By.id("userEmail")).sendKeys("okraj@gmail.com");
         driver.findElement(By.id("userPassword")).sendKeys("Okraj@123");
