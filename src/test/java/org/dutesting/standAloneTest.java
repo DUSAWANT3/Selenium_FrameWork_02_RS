@@ -2,10 +2,13 @@ package org.dutesting;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.dutesting.pageObjects.landingPage;
+import org.openqa.selenium.AcceptedW3CCapabilityKeys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -22,6 +25,8 @@ public class standAloneTest {
         WebDriver driver = new EdgeDriver();
         driver.manage().window().maximize();
         driver.get("https://rahulshettyacademy.com/client");
+
+        landingPage landingpage = new landingPage(driver);
 
         String productName = "ZARA COAT 3";
 
@@ -55,15 +60,32 @@ public class standAloneTest {
         checkOutBut.click();
 
         //in autosuggestion dropdown select India
-        driver.findElement(By.xpath("//input[@placeholder='Select Country']")).sendKeys("India");
+//        driver.findElement(By.xpath("//input[@placeholder='Select Country']")).sendKeys("India");
+//
+//        List<WebElement> options = driver.findElements(By.xpath("//button[@type='button']"));
+//        options.stream().filter(option -> option.getText().equalsIgnoreCase("India"))
+//                .findFirst()
+//                .ifPresent(WebElement::click);
 
-        List<WebElement> options = driver.findElements(By.xpath("//button[@type='button']"));
-        options.stream().filter(option -> option.getText().equalsIgnoreCase("India"))
-                .findFirst()
-                .ifPresent(WebElement::click);
+        Actions a = new Actions(driver);
+          a.sendKeys(driver.findElement(By.xpath("//input[@placeholder='Select Country']")), "India").build().perform();
+
+          wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+          driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 
         //Click on place Order button
-        driver.findElement(By.cssSelector(".action__submit")).click();
+       WebElement placeOrderBut = driver.findElement(By.xpath("//a[normalize-space()='Place Order']"));
+       wait.until(ExpectedConditions.elementToBeClickable(placeOrderBut));
+       placeOrderBut.click();
+
+       //Captchet the Thank you massage
+        WebElement thankYouMsg = driver.findElement(By.xpath("//h1[@class=\"hero-primary\"]"));
+        wait.until(ExpectedConditions.visibilityOf(thankYouMsg));
+        thankYouMsg.getText();
+
+        System.out.println(thankYouMsg.getText());
+
+       driver.quit();
 
     }
 }
