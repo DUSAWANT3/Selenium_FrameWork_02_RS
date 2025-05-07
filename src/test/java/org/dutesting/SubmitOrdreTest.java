@@ -35,14 +35,7 @@ public class SubmitOrdreTest {
         ProductCatalogue productCatalogue = new ProductCatalogue(driver);
         List<WebElement> products = productCatalogue.getProductList();
 
-        WebElement prod =  products.stream().filter(product -> product.findElement(By.cssSelector("b"))
-                        .getText().equals(productName))
-                .findFirst().orElse(null);
-        prod.findElement(By.xpath("//div[@class=\"card-body\"]/button[2]")).click();
-
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("toast-container")));
-        //ng-animating
-        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ng-animating")));
+        productCatalogue.addProductToCart(productName);
 
         //Click on cart button
         driver.findElement(By.xpath("//button[@routerlink=\"/dashboard/cart\"]")).click();
