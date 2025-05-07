@@ -31,11 +31,11 @@ public class standAloneTest {
         String productName = "ZARA COAT 3";
 
         //Enter Username passsword click on login
-        driver.findElement(By.id("userEmail")).sendKeys("okraj@gmail.com");
-        driver.findElement(By.id("userPassword")).sendKeys("Okraj@123");
+        driver.findElement(By.id("userEmail")).sendKeys("aaaaa@gmail.com");
+        driver.findElement(By.id("userPassword")).sendKeys("********pass");
         driver.findElement(By.id("login")).click();
 
-//Collect all the element of products
+//Collect all the elements of the products
         Thread.sleep(3000);
         List<WebElement> products = driver.findElements(By.cssSelector(".col-md-6.mb-3"));
         WebElement prod =  products.stream().filter(product -> product.findElement(By.cssSelector("b"))
@@ -48,13 +48,13 @@ public class standAloneTest {
         //ng-animating
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ng-animating")));
 
-        //Click on cart button
+        //Click on the cart button
         driver.findElement(By.xpath("//button[@routerlink=\"/dashboard/cart\"]")).click();
 
        List<WebElement> cartProducts = driver.findElements(By.xpath("//div[@class=\"cart\"]//h3"));
       cartProducts.stream().filter(cartProduct -> cartProduct.getText().equals(productName));
 
-      //click on checkout button
+      //click on the checkout button
         WebElement checkOutBut = driver.findElement(By.xpath("//button[normalize-space()='Checkout'][1]"));
         wait.until(ExpectedConditions.elementToBeClickable(checkOutBut));
         checkOutBut.click();
