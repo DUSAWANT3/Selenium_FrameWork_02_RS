@@ -2,6 +2,7 @@ package org.dutesting;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.dutesting.pageObjects.ProductCatalogue;
 import org.dutesting.pageObjects.landingPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,17 +32,17 @@ public class SubmitOrdreTest {
         landingpage.loginApplication("okraj@gmail.com", "Okraj@123");
 
 //Collect all the element of products
-        Thread.sleep(3000);
-        List<WebElement> products = driver.findElements(By.cssSelector(".col-md-6.mb-3"));
+        ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+        List<WebElement> products = productCatalogue.getProductList();
+
         WebElement prod =  products.stream().filter(product -> product.findElement(By.cssSelector("b"))
                         .getText().equals(productName))
                 .findFirst().orElse(null);
         prod.findElement(By.xpath("//div[@class=\"card-body\"]/button[2]")).click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("toast-container")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("toast-container")));
         //ng-animating
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ng-animating")));
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ng-animating")));
 
         //Click on cart button
         driver.findElement(By.xpath("//button[@routerlink=\"/dashboard/cart\"]")).click();
@@ -51,7 +52,7 @@ public class SubmitOrdreTest {
 
         //click on checkout button
         WebElement checkOutBut = driver.findElement(By.xpath("//button[normalize-space()='Checkout'][1]"));
-        wait.until(ExpectedConditions.elementToBeClickable(checkOutBut));
+       // wait.until(ExpectedConditions.elementToBeClickable(checkOutBut));
         checkOutBut.click();
 
         //in autosuggestion dropdown select India
@@ -65,17 +66,17 @@ public class SubmitOrdreTest {
         Actions a = new Actions(driver);
         a.sendKeys(driver.findElement(By.xpath("//input[@placeholder='Select Country']")), "India").build().perform();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
         driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 
         //Click on place Order button
         WebElement placeOrderBut = driver.findElement(By.xpath("//a[normalize-space()='Place Order']"));
-        wait.until(ExpectedConditions.elementToBeClickable(placeOrderBut));
+        //wait.until(ExpectedConditions.elementToBeClickable(placeOrderBut));
         placeOrderBut.click();
 
         //Captchet the Thank you massage
         WebElement thankYouMsg = driver.findElement(By.xpath("//h1[@class=\"hero-primary\"]"));
-        wait.until(ExpectedConditions.visibilityOf(thankYouMsg));
+        //wait.until(ExpectedConditions.visibilityOf(thankYouMsg));
         thankYouMsg.getText();
 
         System.out.println(thankYouMsg.getText());

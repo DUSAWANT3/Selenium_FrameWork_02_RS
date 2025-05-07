@@ -1,16 +1,18 @@
 package org.dutesting.pageObjects;
 
+import org.dutesting.AbstractComponent.AbstractComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class landingPage {
+public class landingPage extends AbstractComponent {
 
     WebDriver driver;
-    public landingPage(WebDriver driver){ //Initialization firstly execute
-        this.driver = this.driver;
+    public landingPage(WebDriver driver){
+        super(driver); //Initialization firstly execute
+        this.driver = driver;//child to parrent class send keywords using supper
         PageFactory.initElements(driver,this);
     }
    // WebElement userEmail = driver.findElement(By.id("userEmail"));
@@ -35,6 +37,5 @@ public class landingPage {
         userPassword.sendKeys(password);
         loginButton.click();
     }
-
 
 }

@@ -31,19 +31,20 @@ public class standAloneTest {
         String productName = "ZARA COAT 3";
 
         //Enter Username passsword click on login
-        driver.findElement(By.id("userEmail")).sendKeys("aaaaa@gmail.com");
-        driver.findElement(By.id("userPassword")).sendKeys("********pass");
+        driver.findElement(By.id("userEmail")).sendKeys("okraj@gmail.com");
+        driver.findElement(By.id("userPassword")).sendKeys("Okraj@123");
         driver.findElement(By.id("login")).click();
 
 //Collect all the elements of the products
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".col-md-6.mb-3")));
         List<WebElement> products = driver.findElements(By.cssSelector(".col-md-6.mb-3"));
         WebElement prod =  products.stream().filter(product -> product.findElement(By.cssSelector("b"))
                  .getText().equals(productName))
                  .findFirst().orElse(null);
         prod.findElement(By.xpath("//div[@class=\"card-body\"]/button[2]")).click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("toast-container")));
         //ng-animating
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ng-animating")));
