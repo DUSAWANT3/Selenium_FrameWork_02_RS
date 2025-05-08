@@ -1,5 +1,6 @@
 package org.dutesting.AbstractComponent;
 
+import org.dutesting.pageObjects.CartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,8 +23,10 @@ public class AbstractComponent {
     @FindBy(xpath = "//button[@routerlink=\"/dashboard/cart\"]")
     WebElement cartHeader;
 
-    public void goToCartPage(){
+    public CartPage goToCartPage(){
         cartHeader.click();
+        CartPage cartpage = new CartPage(driver);
+        return cartpage;
     }
 
     //Reusable code
@@ -41,4 +44,5 @@ public class AbstractComponent {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(findby));
     }
+
 }
