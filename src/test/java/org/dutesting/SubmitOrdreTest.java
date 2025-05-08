@@ -3,17 +3,16 @@ package org.dutesting;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.dutesting.pageObjects.ProductCatalogue;
+import org.dutesting.pageObjects.CartPage;
 import org.dutesting.pageObjects.landingPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
 
 public class SubmitOrdreTest {
@@ -29,32 +28,22 @@ public class SubmitOrdreTest {
          landingpage.goTo(); // url
 
         //Enter Username passsword click on login
-        landingpage.loginApplication("okraj@gmail.com", "Okraj@123");
+        ProductCatalogue productCatalogue = landingpage.loginApplication("okraj@gmail.com", "Okraj@123");
 
 //Collect all the element of products
-        ProductCatalogue productCatalogue = new ProductCatalogue(driver);
         List<WebElement> products = productCatalogue.getProductList();
 
         productCatalogue.addProductToCart(productName);
-
         //Click on cart button
-        driver.findElement(By.xpath("//button[@routerlink=\"/dashboard/cart\"]")).click();
+        productCatalogue.goToCartPage();
 
-        List<WebElement> cartProducts = driver.findElements(By.xpath("//div[@class=\"cart\"]//h3"));
-        cartProducts.stream().filter(cartProduct -> cartProduct.getText().equals(productName));
+        CartPage cartpage = new CartPage(driver);
+        Boolean match = cartpage.VerifyProductDisplay(productName);
+        //Assert.assertTrue(match);
 
         //click on checkout button
-        WebElement checkOutBut = driver.findElement(By.xpath("//button[normalize-space()='Checkout'][1]"));
-       // wait.until(ExpectedConditions.elementToBeClickable(checkOutBut));
-        checkOutBut.click();
+        cartpage.goToCheckout();
 
-        //in autosuggestion dropdown select India
-//        driver.findElement(By.xpath("//input[@placeholder='Select Country']")).sendKeys("India");
-//
-//        List<WebElement> options = driver.findElements(By.xpath("//button[@type='button']"));
-//        options.stream().filter(option -> option.getText().equalsIgnoreCase("India"))
-//                .findFirst()
-//                .ifPresent(WebElement::click);
 
         Actions a = new Actions(driver);
         a.sendKeys(driver.findElement(By.xpath("//input[@placeholder='Select Country']")), "India").build().perform();

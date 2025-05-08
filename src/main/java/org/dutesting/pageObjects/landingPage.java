@@ -1,7 +1,6 @@
 package org.dutesting.pageObjects;
 
 import org.dutesting.AbstractComponent.AbstractComponent;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,10 +31,12 @@ public class landingPage extends AbstractComponent {
         driver.get("https://rahulshettyacademy.com/client");
     }
 
-    public void loginApplication(String email, String password){
+    public ProductCatalogue loginApplication(String email, String password){
         userEmail.sendKeys(email);
         userPassword.sendKeys(password);
         loginButton.click();
+        ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+        return productCatalogue;
     }
 
 }
