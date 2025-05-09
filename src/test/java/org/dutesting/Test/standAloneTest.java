@@ -1,9 +1,8 @@
-package org.dutesting;
+package org.dutesting.Test;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.dutesting.pageObjects.landingPage;
-import org.openqa.selenium.AcceptedW3CCapabilityKeys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;

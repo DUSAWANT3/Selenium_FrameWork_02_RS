@@ -1,13 +1,11 @@
-package org.dutesting;
+package org.dutesting.Test;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.dutesting.pageObjects.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
