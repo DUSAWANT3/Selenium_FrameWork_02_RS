@@ -2,6 +2,7 @@ package org.dutesting.Test;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.dutesting.TestComponents.BaseTest;
 import org.dutesting.pageObjects.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,19 +10,19 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
 
-public class SubmitOrdreTest {
+public class SubmitOrdreTest extends BaseTest {
+
     @Test
     @Description("Verify Ecommerce Website")
     @Owner("DUSWANT")
-    public void ecommerceWebSite() throws InterruptedException {
-        WebDriver driver = new EdgeDriver();
-        driver.manage().window().maximize();
+    public void ecommerceWebSite() throws InterruptedException, IOException {
+        
         String productName = "ZARA COAT 3";
 
-        landingPage landingpage = new landingPage(driver);
-         landingpage.goTo(); // url
+        landingPage landingpage = launchApplication();
 
         //Enter Username passsword click on login
         ProductCatalogue productCatalogue = landingpage.loginApplication("okraj@gmail.com", "Okraj@123");

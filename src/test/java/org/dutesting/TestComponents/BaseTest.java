@@ -1,12 +1,12 @@
 package org.dutesting.TestComponents;
 
+import org.dutesting.pageObjects.landingPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -14,11 +14,11 @@ public class BaseTest {
 
     public WebDriver driver;
 
-    public void initializeDriver() throws IOException {
+    public WebDriver initializeDriver() throws IOException {
 
         //Properties class
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream(System.getProperty("user.dit")+"//src//main//java//org//dutesting//resources//GlobalDriver.properties");
+        FileInputStream file = new FileInputStream(System.getProperty("user.dir")+"//src//main//java//org//dutesting//resources//GlobalDriver.properties");
         prop.load(file);
         String browserName = prop.getProperty("browser");
 
@@ -31,5 +31,13 @@ public class BaseTest {
             driver = new ChromeDriver();
         }
         driver.manage().window().maximize();
+        return driver;
+    }
+
+    public landingPage launchApplication() throws IOException {
+        WebDriver driver = initializeDriver();
+        landingPage landingpage = new landingPage(driver);
+        landingpage.goTo(); // url
+        return landingpage;
     }
 }
