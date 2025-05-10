@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ErrorValidation extends BaseTest {
     @Test
-    @Description("Verify Ecommerce Website")
+    @Description("Verify invalid lod in ID 1")
     @Owner("DUSWANT")
     public void ecommerceWebSite() throws InterruptedException, IOException {
 
@@ -24,6 +24,18 @@ public class ErrorValidation extends BaseTest {
 
         //Enter Invalid Username passsword click on login
         landingpage.loginApplication("invalid@gmail.com", "invalid@123");
-        Assert.assertEquals(landingpage.getErrorMessage(), "Incorrect email or password.","Negative testing");
+        Assert.assertEquals(landingpage.getErrorMessage(), "Incorrect email or password.", "Negative testing");
+    }
+
+    @Test
+    @Description("Verify invalid login Id")
+    @Owner("DUSWANT")
+    public void ecommerceWebSite1() throws InterruptedException, IOException {
+
+        String productName = "ZARA COAT 3";
+
+        //Enter Invalid Username passsword click on login
+        landingpage.loginApplication("invalid1@gmail.com", "inval2id@123");
+        Assert.assertEquals(landingpage.getErrorMessage(), "Incorrect email or password.", "Negative testing");
     }
 }

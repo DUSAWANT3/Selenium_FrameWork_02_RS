@@ -31,7 +31,6 @@ public class SubmitOrdreTest extends BaseTest {
         productCatalogue.addProductToCart(productName);
         //Click on cart button
         CartPage cartpage = productCatalogue.goToCartPage();
-
         Boolean match = cartpage.VerifyProductDisplay(productName);
         //Assert.assertTrue(match);
 
@@ -43,6 +42,14 @@ public class SubmitOrdreTest extends BaseTest {
         String ConfirmMessage = confirmationPage.getConfirmationMessage();
         System.out.println(confirmationPage.getConfirmationMessage());
         Assert.assertTrue(ConfirmMessage.equalsIgnoreCase("Thankyou for the order."));
+    }
+    @Test(dependsOnMethods = "SubmitOrdreTest")
+    @Description("Verify ZARA COAT 3 is dispiaying in Order page")
+    @Owner("DUSWANT")
+    public void OrderHistoryTest(){
+        //Enter Username passsword click on login
+        ProductCatalogue productCatalogue = landingpage.loginApplication("okraj@gmail.com", "Okraj@123");
+        //click on Order Button
 
     }
 }
