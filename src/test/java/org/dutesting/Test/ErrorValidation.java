@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ErrorValidation extends BaseTest {
-    @Test
+    @Test(groups = "ErrorValidation")
     @Description("Verify invalid lod in ID 1")
     @Owner("DUSWANT")
     public void ecommerceWebSite() throws InterruptedException, IOException {
@@ -27,7 +27,7 @@ public class ErrorValidation extends BaseTest {
         Assert.assertEquals(landingpage.getErrorMessage(), "Incorrect email or password.", "Negative testing");
     }
 
-    @Test
+    @Test(groups = "ErrorValidation")
     @Description("Verify invalid login Id")
     @Owner("DUSWANT")
     public void ecommerceWebSite1() throws InterruptedException, IOException {

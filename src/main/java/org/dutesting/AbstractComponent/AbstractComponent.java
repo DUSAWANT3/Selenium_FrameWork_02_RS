@@ -25,7 +25,7 @@ public class AbstractComponent {
     WebElement cartHeader;
 
     //Click on Order button
-    @FindBy(xpath = "(//button[@class=\"btn btn-custom\"])[2]")
+    @FindBy(xpath = "//button[@routerlink=\"/dashboard/myorders\"]")
     WebElement orderHeader;
 
     public CartPage goToCartPage(){
@@ -34,10 +34,11 @@ public class AbstractComponent {
         return cartpage;
     }
 
-    public WebElement goToOrderPage(){
+    public OrderPage goToOrderPage(){
+        waitForElementTObeClickable(orderHeader);
         orderHeader.click();
-        OrderPage cartpage = new OrderPage(driver);
-        return orderHeader;
+        OrderPage orderPage = new OrderPage(driver);
+        return orderPage;
     }
 
     //Reusable code
