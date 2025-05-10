@@ -27,6 +27,9 @@ public class landingPage extends AbstractComponent {
     @FindBy(id="login")
     WebElement loginButton;
 
+    @FindBy(css="[class*=\"flyInOut\"]")
+    WebElement errorMessage;
+
     public void goTo(){
         driver.get("https://rahulshettyacademy.com/client");
     }
@@ -37,6 +40,11 @@ public class landingPage extends AbstractComponent {
         loginButton.click();
         ProductCatalogue productCatalogue = new ProductCatalogue(driver);
         return productCatalogue;
+    }
+
+    public String getErrorMessage(){
+        waitForElementTObeVisible(errorMessage);
+        return errorMessage.getText();
     }
 
 }

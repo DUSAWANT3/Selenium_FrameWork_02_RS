@@ -22,8 +22,6 @@ public class SubmitOrdreTest extends BaseTest {
         
         String productName = "ZARA COAT 3";
 
-        landingPage landingpage = launchApplication();
-
         //Enter Username passsword click on login
         ProductCatalogue productCatalogue = landingpage.loginApplication("okraj@gmail.com", "Okraj@123");
 
@@ -44,10 +42,8 @@ public class SubmitOrdreTest extends BaseTest {
 
         String ConfirmMessage = confirmationPage.getConfirmationMessage();
         System.out.println(confirmationPage.getConfirmationMessage());
-
         Assert.assertTrue(ConfirmMessage.equalsIgnoreCase("Thankyou for the order."));
 
-        driver.quit();
     }
 }
 

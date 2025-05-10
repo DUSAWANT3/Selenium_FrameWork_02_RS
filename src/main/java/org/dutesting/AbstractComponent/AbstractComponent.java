@@ -45,4 +45,9 @@ public class AbstractComponent {
         wait.until(ExpectedConditions.elementToBeClickable(findby));
     }
 
+    public void waitForElementTObeVisible (WebElement findby){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(findby));
+    }
+
 }
