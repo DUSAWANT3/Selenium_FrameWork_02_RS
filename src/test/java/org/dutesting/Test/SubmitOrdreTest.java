@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SubmitOrdreTest extends BaseTest {
 
-    String productName = "ZARA COAT 3";
+    //String productName = "ZARA COAT 3";
 
     @Test(dataProvider = "getData", groups = {"PurchaseOrder"})
     @Description("Verify Ecommerce Website")
@@ -43,12 +43,12 @@ public class SubmitOrdreTest extends BaseTest {
         Assert.assertTrue(ConfirmMessage.equalsIgnoreCase("Thankyou for the order."));
     }
 
-    @Test(dependsOnMethods = "ecommerceWebSite")
+    @Test(dependsOnMethods = "ecommerceWebSite", dataProvider = "getData")
     @Description("Verify ZARA COAT 3 is dispiaying in Order page")
     @Owner("DUSWANT")
-    public void OrderHistoryTest(){
+    public void OrderHistoryTest(String email, String password, String productName){
         //Enter Username passsword click on login
-        ProductCatalogue productCatalogue = landingpage.loginApplication("okraj@gmail.com", "Okraj@123");
+        ProductCatalogue productCatalogue = landingpage.loginApplication(email, password);
         //click on Order Button
         OrderPage orderPage = productCatalogue.goToOrderPage();
         Assert.assertTrue(orderPage.VerifyOrderDisplay(productName));
