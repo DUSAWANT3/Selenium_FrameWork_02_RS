@@ -10,6 +10,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class SubmitOrdreTest extends BaseTest {
@@ -19,18 +20,18 @@ public class SubmitOrdreTest extends BaseTest {
     @Test(dataProvider = "getData", groups = {"PurchaseOrder"})
     @Description("Verify Ecommerce Website")
     @Owner("DUSWANT")
-    public void ecommerceWebSite(String email, String password, String productName) throws InterruptedException, IOException {
+    public void ecommerceWebSite(HashMap<String,String> input) throws InterruptedException, IOException {
 
         //Enter Username passsword click on login
-        ProductCatalogue productCatalogue = landingpage.loginApplication(email, password);
+        ProductCatalogue productCatalogue = landingpage.loginApplication(input.get("email"),input.get("password"));
 
 //Collect all the element of products
         List<WebElement> products = productCatalogue.getProductList();
 
-        productCatalogue.addProductToCart(productName);
+        productCatalogue.addProductToCart(input.get("productName"));
         //Click on cart button
         CartPage cartpage = productCatalogue.goToCartPage();
-        Boolean match = cartpage.VerifyProductDisplay(productName);
+        Boolean match = cartpage.VerifyProductDisplay(input.get("productName"));
         //Assert.assertTrue(match);
 
         //click on checkout button
@@ -46,17 +47,33 @@ public class SubmitOrdreTest extends BaseTest {
     @Test(dependsOnMethods = "ecommerceWebSite", dataProvider = "getData")
     @Description("Verify ZARA COAT 3 is dispiaying in Order page")
     @Owner("DUSWANT")
-    public void OrderHistoryTest(String email, String password, String productName){
+    public void OrderHistoryTest(HashMap<String,String> input1){
         //Enter Username passsword click on login
-        ProductCatalogue productCatalogue = landingpage.loginApplication(email, password);
+        ProductCatalogue productCatalogue = landingpage.loginApplication(input1.get("email"),input1.get("password"));
         //click on Order Button
         OrderPage orderPage = productCatalogue.goToOrderPage();
-        Assert.assertTrue(orderPage.VerifyOrderDisplay(productName));
+        Assert.assertTrue(orderPage.VerifyOrderDisplay(input1.get("productName")));
     }
 
     @DataProvider
     public Object[][] getData(){
-       return new Object[][] {{"okraj@gmail.com","Okraj@123","ZARA COAT 3"},{"okraj@gmail.com","Okraj@123", "ADIDAS ORIGINAL"}};
+        HashMap<String,String> map = new HashMap<String,String>();
+        map.put("email","okraj@gmail.com");
+        map.put("password","Okraj@123");
+        map.put("productName","ZARA COAT 3" );
+
+        HashMap<String,String> map1 = new HashMap<String,String>();
+        map1.put("email","okraj@gmail.com");
+        map1.put("password","Okraj@123");
+        map1.put("productName","ADIDAS ORIGINAL" );
+
+       return new Object[][] {{map},{map1}};
+                //{{Data_set_1},{Data_set_2}}
+
+//        @DataProvider
+//        public Object[][] getData(){
+//            return new Object[][] {{"okraj@gmail.com","Okraj@123","ZARA COAT 3"},{"okraj@gmail.com","Okraj@123","ADIDAS ORIGINAL"}};
+//            //{{Data_set_1},{Data_set_2}}
 
     }
 }
