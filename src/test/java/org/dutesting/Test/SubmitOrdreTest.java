@@ -2,13 +2,17 @@ package org.dutesting.Test;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.apache.commons.io.FileUtils;
 import org.dutesting.TestComponents.BaseTest;
 import org.dutesting.pageObjects.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -55,20 +59,32 @@ public class SubmitOrdreTest extends BaseTest {
         Assert.assertTrue(orderPage.VerifyOrderDisplay(input1.get("productName")));
     }
 
+    public String getScreenShot(String testCaseName) throws IOException {
+       TakesScreenshot ts = (TakesScreenshot)driver;
+       File sourse = ts.getScreenshotAs(OutputType.FILE);
+       File file = new File(System.getProperty("user.dir")+"//reports//" +testCaseName +".png");
+        FileUtils.copyFile(sourse, file);
+        return System.getProperty("user.dir")+"//reports//" +testCaseName +".png";
+        //return file;
+    }
+
     @DataProvider
-    public Object[][] getData(){
-        HashMap<String,String> map = new HashMap<String,String>();
-        map.put("email","okraj@gmail.com");
-        map.put("password","Okraj@123");
-        map.put("productName","ZARA COAT 3" );
+    public Object[][] getData() throws IOException {
+        //get data from Json file
+        List<HashMap<String,String>> data = getJsonDataToMap(System.getProperty("user.dir")+"/src/test/java/org/dutesting/Data/PurchaseOrder.json");
+        return new Object[][] {{data.get(0)},{data.get(1)}};
+        //{{Data_set_1},{Data_set_2}}
 
-        HashMap<String,String> map1 = new HashMap<String,String>();
-        map1.put("email","okraj@gmail.com");
-        map1.put("password","Okraj@123");
-        map1.put("productName","ADIDAS ORIGINAL" );
+//        HashMap<String,String> map = new HashMap<String,String>();
+//        map.put("email","okraj@gmail.com");
+//        map.put("password","Okraj@123");
+//        map.put("productName","ZARA COAT 3" );
+//
+//        HashMap<String,String> map1 = new HashMap<String,String>();
+//        map1.put("email","okraj@gmail.com");
+//        map1.put("password","Okraj@123");
+//        map1.put("productName","ADIDAS ORIGINAL" );
 
-       return new Object[][] {{map},{map1}};
-                //{{Data_set_1},{Data_set_2}}
 
 //        @DataProvider
 //        public Object[][] getData(){
