@@ -85,7 +85,6 @@ public class SubmitOrdreTest extends BaseTest {
 //        map1.put("password","Okraj@123");
 //        map1.put("productName","ADIDAS ORIGINAL" );
 
-
 //        @DataProvider
 //        public Object[][] getData(){
 //            return new Object[][] {{"okraj@gmail.com","Okraj@123","ZARA COAT 3"},{"okraj@gmail.com","Okraj@123","ADIDAS ORIGINAL"}};
