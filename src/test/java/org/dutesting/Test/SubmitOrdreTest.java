@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.apache.commons.io.FileUtils;
 import org.dutesting.TestComponents.BaseTest;
+import org.dutesting.TestComponents.Retry;
 import org.dutesting.pageObjects.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -48,7 +49,7 @@ public class SubmitOrdreTest extends BaseTest {
         Assert.assertTrue(ConfirmMessage.equalsIgnoreCase("Thankyou for the order."));
     }
 
-    @Test(dependsOnMethods = "ecommerceWebSite", dataProvider = "getData")
+    @Test(dependsOnMethods = "ecommerceWebSite", dataProvider = "getData", retryAnalyzer = Retry.class)
     @Description("Verify ZARA COAT 3 is dispiaying in Order page")
     @Owner("DUSWANT")
     public void OrderHistoryTest(HashMap<String,String> input1){
