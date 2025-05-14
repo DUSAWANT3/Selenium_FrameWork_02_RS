@@ -15,11 +15,13 @@ public class Listeners extends BaseTest implements ITestListener {
 
     ExtentReports extent = ExtentReporterNG.getReportObject();
     ExtentTest test;
+    ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
 
     @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
         test = extent.createTest(result.getMethod().getMethodName());
+        extentTest.set(test);//unique thread id(ErrorValidation test
     }
 
     @Override
@@ -32,7 +34,8 @@ public class Listeners extends BaseTest implements ITestListener {
     public void onTestFailure(ITestResult result) {
         ITestListener.super.onTestFailure(result);
         test.log(Status.FAIL,"Test Failed");
-        test.fail(result.getThrowable());//Gives Error msg as well
+        //test.fail(result.getThrowable());//Gives Error msg as well
+        extentTest.get().fail(result.getThrowable());
 
         //Screenshot only take when TC fail
         //Take Screenshot --> attach to the Report
