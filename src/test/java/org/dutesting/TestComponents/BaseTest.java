@@ -31,7 +31,10 @@ public class BaseTest {
         Properties prop = new Properties();
         FileInputStream file = new FileInputStream(System.getProperty("user.dir")+"//src//main//java//org//dutesting//resources//GlobalDriver.properties");
         prop.load(file);
-        String browserName = prop.getProperty("browser");
+        String browserName =
+                System.getProperty("browser")!= null ? System.getProperty("browser") : prop.getProperty("browser");
+        //when user give command inn maven CMD "mvn test -Dbrowser= firefox" so it run in firefox browser
+        //String browserName = prop.getProperty("browser");
 
         //Chrome
         if (browserName.equalsIgnoreCase("Edge")) {
