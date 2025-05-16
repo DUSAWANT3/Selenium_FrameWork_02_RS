@@ -106,7 +106,7 @@
 
   <profiles>
     <profile>
-      <id>Regeration</id>
+      <id>Regeneration</id>
       <build>
       <plugins>
         <plugin>

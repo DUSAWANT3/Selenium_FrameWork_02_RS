@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
@@ -42,7 +43,10 @@ public class BaseTest {
         } else if (browserName.equalsIgnoreCase("Firefox")) {
             driver = new FirefoxDriver();
         } else if (browserName.equalsIgnoreCase("Chrome")) {
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("headless");
+
+            driver = new ChromeDriver(options);
         }
         driver.manage().window().maximize();
         return driver;
