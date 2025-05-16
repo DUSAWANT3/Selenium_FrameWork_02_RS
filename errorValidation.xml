@@ -1,0 +1,16 @@
+<suite name="All Test Suite">
+    <listeners>
+        <listener class-name="org.dutesting.TestComponents.Listeners"/>
+    </listeners>
+
+    <test name="...">
+        <classes>
+            <class name="org.dutesting.Test.ErrorValidation">
+                <methods>
+                    <include name="ecommerceWebSite"/>
+                    <include name="ecommerceWebSite1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
