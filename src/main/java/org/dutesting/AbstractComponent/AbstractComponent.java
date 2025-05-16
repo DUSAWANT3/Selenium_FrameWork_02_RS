@@ -19,6 +19,7 @@ public class AbstractComponent {
         PageFactory.initElements(driver, this);
     }
 
+
     //Click on cart button
     // driver.findElement(By.xpath("//button[@routerlink=\"/dashboard/cart\"]")).click();
     @FindBy(xpath = "//button[@routerlink=\"/dashboard/cart\"]")
