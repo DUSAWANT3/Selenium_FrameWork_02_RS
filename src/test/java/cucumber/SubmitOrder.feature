@@ -5,12 +5,12 @@
     Background:
       Given I landed on Ecommerce website page
 
-  @tag2
+  @RegressionTest
    Scenario Outline: Positive test of submitting the order
-    Given Logged in with username username <name> and password <password>
+    Given Logged in with username <name> and password <password>
     When  I add product <productName> to cart
     And  Checkout <productName> and submit the order
-    Then "Thankyou for the order." message is displayed on confermationPage
+    Then "Thankyou for the order." message is displayed on conformationPage
 
 
     Examples:
