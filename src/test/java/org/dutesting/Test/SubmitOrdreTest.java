@@ -32,7 +32,6 @@ public class SubmitOrdreTest extends BaseTest {
 
 //Collect all the element of products
         List<WebElement> products = productCatalogue.getProductList();
-
         productCatalogue.addProductToCart(input.get("productName"));
         //Click on cart button
         CartPage cartpage = productCatalogue.goToCartPage();
@@ -45,7 +44,7 @@ public class SubmitOrdreTest extends BaseTest {
         ConfirmationPage confirmationPage = checkOutPage.submitOrder();
 
         String ConfirmMessage = confirmationPage.getConfirmationMessage();
-        System.out.println(confirmationPage.getConfirmationMessage());
+        //System.out.println(confirmationPage.getConfirmationMessage());
         Assert.assertTrue(ConfirmMessage.equalsIgnoreCase("Thankyou for the order."));
     }
 
