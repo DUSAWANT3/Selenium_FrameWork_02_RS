@@ -36,5 +36,6 @@ public class CartPage extends AbstractComponent {
         waitForElementTObeClickable(checkoutEle);
         checkoutEle.click();
         return new CheckoutPage(driver);
+
     }
 }
