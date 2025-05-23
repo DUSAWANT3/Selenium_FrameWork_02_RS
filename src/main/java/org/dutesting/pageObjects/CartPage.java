@@ -31,7 +31,6 @@ public class CartPage extends AbstractComponent {
          Boolean match = cartProducts.stream().anyMatch(product -> product.getText().equalsIgnoreCase(productName));
          return match;
     }
-
     public CheckoutPage goToCheckout(){
         waitForElementTObeClickable(checkoutEle);
         checkoutEle.click();
