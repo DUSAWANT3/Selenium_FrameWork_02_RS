@@ -12,7 +12,6 @@
     And  Checkout <productName> and submit the order
     Then "Thankyou for the order." message is displayed on conformationPage
 
-
     Examples:
     |name              | password  |productName  |
     | okraj@gmail.com  | Okraj@123 | ZARA COAT 3 |
