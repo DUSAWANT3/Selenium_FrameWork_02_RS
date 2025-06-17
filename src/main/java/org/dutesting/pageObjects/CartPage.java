@@ -26,7 +26,6 @@ public class CartPage extends AbstractComponent {
    // WebElement checkOutBut = driver.findElement(By.xpath("//button[normalize-space()='Checkout'][1]"));
     @FindBy (xpath = "//button[normalize-space()='Checkout'][1]")
     WebElement checkoutEle;
-
     public Boolean VerifyProductDisplay(String productName) {
          Boolean match = cartProducts.stream().anyMatch(product -> product.getText().equalsIgnoreCase(productName));
          return match;
